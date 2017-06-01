@@ -121,6 +121,7 @@
             // 
             // Popup
             // 
+            this.AcceptButton = this.button2;
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackgroundImage = global::GuessPakGanern.Properties.Resources.Popupbg;
             this.ClientSize = new System.Drawing.Size(556, 329);
@@ -134,6 +135,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Popup";
+            this.Load += new System.EventHandler(this.Popup_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

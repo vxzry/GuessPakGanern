@@ -64,6 +64,7 @@
             this.body.Size = new System.Drawing.Size(464, 233);
             this.body.TabIndex = 5;
             this.body.Text = resources.GetString("body.Text");
+            this.body.Click += new System.EventHandler(this.body_Click);
             // 
             // HowToPlay
             // 

@@ -11,9 +11,20 @@ namespace GuessPakGanern
     public partial class ucGameScreen : UserControl
     {
         //VARIABLE DECLARATION
+        public string Player
+        {
+            get { return !string.IsNullOrEmpty(player) ? player : "~Alien~"; }
+            set { player = !string.IsNullOrEmpty(value) ? value : "~Alien~"; }
+        }
+        public int Score
+        {
+            get { return score >= 0 ? score : 0; }
+            set { score = value >= 0 ? value : 0; }
+        }
+        public bool boolHighscore { get; private set; }
         private Keyboard keyboard;
         private mainForm mainForm;
-        const int LIFE = 6;
+        int LIFE = 8;
         int round;
         private int life;
         string word;
@@ -26,7 +37,7 @@ namespace GuessPakGanern
         List<int> doneIndex; //to avoid repetition of words
         List<Heart> lives;
         Random random;
-
+        
         //CONSTRUCTORS
         public ucGameScreen()
         {
@@ -37,12 +48,14 @@ namespace GuessPakGanern
         public ucGameScreen(mainForm mainForm, string player): this()
         {
             this.mainForm = mainForm;
-            this.player = player;
+            this.Player = player;
         }
+
+
 
         //FUNCTIONS
         #region
-
+        
         private void newGame()
         {
             random = new Random();
@@ -67,7 +80,7 @@ namespace GuessPakGanern
             lives = new List<Heart>();
             getWord();
             round++;
-
+            lblGameOver.Visible = false;
             updateRound();
             updateScore();
             updateLives();
@@ -100,7 +113,7 @@ namespace GuessPakGanern
         {
             if (doneIndex.Count == wordList.Count)
             {
-                Popup popup = new Popup("Congratulations!!!", "You guessed all the words\nDo you wish to start a new game?", "Main Menu", "New Game");
+                Popup popup = new Popup("Congratulations!!!", "We ran out of words\nDo you wish to start a new game?", "Main Menu", "New Game");
                 popup.FormClosed += NoWordsLeft_Popup_FormClosed;
                 popup.ShowDialog();
                 endGame();
@@ -124,7 +137,6 @@ namespace GuessPakGanern
                     label1.Text += c + " ";
                 }
                 display();
-                //display clue
             }
         }
 
@@ -136,12 +148,13 @@ namespace GuessPakGanern
                 label1.Text += c + "  ";
             }
         }
+
         private void saveScore()
         {
+            boolHighscore = false;
             //get current score
-            HighScore currentHS = new HighScore(this.player, this.score);
+            HighScore currentHS = new HighScore(this.Player, this.Score);
             List<HighScore> highscores = new List<HighScore>();
-            highscores.Add(currentHS);
             //create highscore.csv file if not found
             string path = AppDomain.CurrentDomain.BaseDirectory + @"\" + "highscore.csv";
 
@@ -161,9 +174,16 @@ namespace GuessPakGanern
                         }
                     }
                 }
-                //compare current score with scores from the file
+                highscores = highscores.OrderByDescending(x => x.Score).ToList();
+                //if current score is the NEW highscore (idk how to englsh)
+                if (currentHS.Score > highscores[0].Score)
+                {
+                    boolHighscore = true;
+                }
+                highscores.Add(currentHS);
                 //Sort list to get top 10 (only save top 10)
                 List<HighScore> SortedList = highscores.OrderByDescending(x => x.Score).ToList();
+                
                 //write to file
                 string scores = "";
                 for (int i = 0; i < (SortedList.Count>=10?10:SortedList.Count); i++)
@@ -175,6 +195,7 @@ namespace GuessPakGanern
                 {
                     sw.WriteLine(scores);
                 }
+
             }
             else
             {
@@ -198,6 +219,7 @@ namespace GuessPakGanern
         private void updateLives()
         {
             this.lifePanel.Controls.Clear();
+
             for (int i = 0, x=18; i < life; i++, x+=34)
             {
                 Heart heart = new Heart();
@@ -264,10 +286,18 @@ namespace GuessPakGanern
                 label1.Text += c + "  ";
             }
 
+            lblGameOver.Visible = true;
+
             picGiveUp.SendToBack();
             picNewGame.BringToFront();
-
             saveScore();
+            //if high score - display popup :) :) :) 
+            if (boolHighscore)
+            {
+                Popup popup = new Popup("Congratulations " +Player+ "!!!", "New Highscore!", "Highscores", "Okay");
+                popup.FormClosed += Highscore_Popup_FormClosed;
+                popup.ShowDialog();
+            }
         }
 
         private void setUpKeyboard()
@@ -300,6 +330,15 @@ namespace GuessPakGanern
             else
             {
                 this.newGame();
+            }
+        }
+
+
+        private void Highscore_Popup_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if ((sender as Popup).Result == 1)
+            {
+                this.mainForm.changeScreen(new ucHighscore(mainForm));
             }
         }
 

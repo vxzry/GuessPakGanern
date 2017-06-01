@@ -38,6 +38,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.picGiveUp = new System.Windows.Forms.PictureBox();
             this.picNewGame = new System.Windows.Forms.PictureBox();
+            this.lblGameOver = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picBack)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picGiveUp)).BeginInit();
@@ -100,12 +101,12 @@
             this.lblRound.BackColor = System.Drawing.Color.Transparent;
             this.lblRound.Font = new System.Drawing.Font("Tw Cen MT", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblRound.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.lblRound.Location = new System.Drawing.Point(307, 3);
+            this.lblRound.Location = new System.Drawing.Point(379, 3);
             this.lblRound.Name = "lblRound";
-            this.lblRound.Size = new System.Drawing.Size(186, 45);
+            this.lblRound.Size = new System.Drawing.Size(114, 45);
             this.lblRound.TabIndex = 2;
             this.lblRound.Text = "ROUND ";
-            this.lblRound.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblRound.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // panel1
             // 
@@ -127,7 +128,7 @@
             this.lifePanel.BackColor = System.Drawing.Color.Transparent;
             this.lifePanel.Location = new System.Drawing.Point(77, 10);
             this.lifePanel.Name = "lifePanel";
-            this.lifePanel.Size = new System.Drawing.Size(224, 34);
+            this.lifePanel.Size = new System.Drawing.Size(296, 34);
             this.lifePanel.TabIndex = 4;
             // 
             // label2
@@ -172,11 +173,24 @@
             this.picNewGame.MouseEnter += new System.EventHandler(this.picNewGame_MouseEnter);
             this.picNewGame.MouseLeave += new System.EventHandler(this.picNewGame_MouseLeave);
             // 
+            // lblGameOver
+            // 
+            this.lblGameOver.BackColor = System.Drawing.Color.Transparent;
+            this.lblGameOver.Font = new System.Drawing.Font("Tw Cen MT", 30.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblGameOver.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(66)))), ((int)(((byte)(111)))));
+            this.lblGameOver.Location = new System.Drawing.Point(227, 54);
+            this.lblGameOver.Name = "lblGameOver";
+            this.lblGameOver.Size = new System.Drawing.Size(357, 45);
+            this.lblGameOver.TabIndex = 5;
+            this.lblGameOver.Text = "GAME OVER";
+            this.lblGameOver.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // ucGameScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::GuessPakGanern.Properties.Resources._50861_O6IQSM;
+            this.Controls.Add(this.lblGameOver);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.picGiveUp);
             this.Controls.Add(this.picBack);
@@ -204,5 +218,6 @@
         private System.Windows.Forms.Panel lifePanel;
         private System.Windows.Forms.PictureBox picGiveUp;
         private System.Windows.Forms.PictureBox picNewGame;
+        public System.Windows.Forms.Label lblGameOver;
     }
 }

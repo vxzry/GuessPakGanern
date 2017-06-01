@@ -5,27 +5,19 @@
         private int score;
         private string player;
 
+        public int Score { get { return this.score; } set { this.score = value; } }
+        public string Player { get { return this.player; } set { this.player = value; } }
+
         public HighScore()
         {
-            this.Score = 0;
-            this.Player = "";
+            this.score = 0;
+            this.player = "";
         }
 
         public HighScore(string player, int score)
         {
             this.Player = player;
             this.Score = score;
-        }
-
-        public string Player
-        {
-            get { return !string.IsNullOrEmpty(player) ? player : "~Alien~"; }
-            set { player = !string.IsNullOrEmpty(value) ? value : "~Alien~"; }
-        }
-        public int Score
-        {
-            get { return score >= 0 ? score : 0; }
-            set { score = value >= 0 ? value : 0; }
         }
     }
 }

@@ -36,6 +36,7 @@ namespace GuessPakGanern
             mainForm.Dispose();
         }
 
+        //new game
         private void label1_Click(object sender, EventArgs e)
         {
             Popup popup = new Popup("PLAYER", "\nEnter your name: ", "Cancel", "Continue");

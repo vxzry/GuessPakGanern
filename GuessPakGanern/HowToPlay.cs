@@ -37,5 +37,10 @@ namespace GuessPakGanern
         {
             button1.Size = new Size(130, 50);
         }
+
+        private void body_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

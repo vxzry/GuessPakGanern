@@ -93,6 +93,10 @@ namespace GuessPakGanern
             this.txtbox.Visible = true;
             this.txtbox.Focus();
         }
+        
 
+        private void Popup_Load(object sender, EventArgs e)
+        {
+        }
     }
 }
